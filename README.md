@@ -4,9 +4,9 @@ The purpose of this project is to continue the pipeline that begins with checkin
 
 The program:
 
-	1. Reads in non-thresholded files and thresholds them based on a score which indicates the likelihood of there being a motif.
-	2. Uses motif start index indicated in thresholded file to find the DNA sequences from fasta files containing the raw DNA sequences.
-	3. Populates a csv file with the DNA sequences for every species starting at the previously found index.
+1. Reads in non-thresholded files and thresholds them based on a score which indicates the likelihood of there being a motif.
+2. Uses motif start index indicated in thresholded file to find the DNA sequences from fasta files containing the raw DNA sequences.
+3. Populates a csv file with the DNA sequences for every species starting at the previously found index.
 
 
 # Motivation
