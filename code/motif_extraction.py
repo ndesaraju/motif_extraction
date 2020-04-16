@@ -8,6 +8,48 @@ from glob import glob
 import csv
 import re
 import os
+import sys
+
+# sys inputs
+try:
+    path = sys.argv[1]
+    path_to_raw = sys.argv[2]
+    length = sys.argv[3]
+    motif = sys.argv[4]
+    motif_path = sys.argv[5]
+    output_path = sys.argv[6]
+
+    if os.isdir(path):
+        if not os.listdir(path)[0].endswith(".csv"):
+            raise Exception("Files in directory are not CSV's.")
+    else:
+        raise Exception("Input is not a directory")
+
+    if os.isdir(path_to_raw):
+        if not os.listdir(path_to_raw)[0].endswith(".fasta"):
+            raise Exception("Files in directory are not fasta's.")
+    else:
+        raise Exception("path_to_raw input is not a directory")
+
+    if not type(length) == int:
+        raise Exception("Length provided is not an integer.")
+
+    if not type(motif) == str:
+        raise Exception("Motif is not a string.")
+
+    if not motif_path.endswith(".jaspar"):
+        raise Exception("Motif file is not a jaspar file.")
+
+    if not os.isdir(output_path):
+        print("Creating output directory {0}".format(output_path))
+        try:
+            os.makedirs(output_path)
+        except:
+            pass
+except:
+    print("Incorrect number of arguments provided. Make sure to provide: \n1. {0} \n2. {1} \n3. {2} \n4. {3} \n5. {4} \n6. {5}".format("Path to the directory containing nonthresholded csv files", "Path to directory containing raw data", "Integer length of the sequence you want pulled before and after the motif", "String of motif name (e.g. \"bcd\")", "Jaspar file containing motif", "Output directory"))
+
+
 
 
 def seqToString(motif):
@@ -136,12 +178,7 @@ def extract_motifs(path, path_to_raw, length, motif_key, motif_path, output_path
             print("Motif Extraction {0}% completed!".format(round(count/num_files*100, 2)))
     print("Motif Extraction Completed!")
 
-path = "/Volumes/ciera_1/analysis/2.re-running_whole_pipeline/data/jaspar_redo_2019_09_06/bcd"
-path_to_raw = "/Volumes/ciera_1/analysis/2.re-running_whole_pipeline/data/3.24_species_only"
-motif_path = "/Users/niharikadesaraju/Archive/TFBS_presence/data/jaspar_fm/modified/MA0212.1_bcd.jaspar"
-output_path = "/Volumes/ciera_1/analysis/2.re-running_whole_pipeline/python_script_output/"
-
-extract_motifs(path, path_to_raw, 6, "bcd", motif_path, output_path)
+extract_motifs(path, path_to_raw, length, motif, motif_path, output_path)
         
 
 

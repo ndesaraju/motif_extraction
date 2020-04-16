@@ -14,6 +14,11 @@ The program:
 We want to be able to recognize patterns in the evolution of motif sequences, and analyze TFBS spacing patterns.
 
 
-# Features
+# Usage
 
-I'm unsure what to put here.
+Inputs: Path to the directory containing nonthresholded csv files, path to directory containing raw data, integer length of the sequence you want pulled before and after the motif, string of motif name (e.g. "bcd"), jaspar file containing motif, and output directory.
+
+Outputs: A directory of CSV files containing the motif sequence and the specified number of nucleotides before and after. If it doesn't exist, the output directory will be created.
+
+Running the command: In terminal you should be able to type - 
+python motif_extraction.py "/data/jaspar_redo_2019_09_06/bcd", "/data/3.24_species_only", 6, "bcd", "/data/jaspar_fm/modified/MA0212.1_bcd.jaspar" "/python_script_output"
